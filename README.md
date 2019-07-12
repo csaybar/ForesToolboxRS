@@ -19,7 +19,7 @@ vegetation time series – (PVts-β). Ecological Indicators, 94, 367–379.](htt
 ## Install
 ```
 library(devtools)
-install_github(ytarazona/ForesToolboxRS)
+install_github("ytarazona/ForesToolboxRS")
 ```
 ## Some functions
 ```
