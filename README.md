@@ -1,3 +1,5 @@
+[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+
 # ForesToolboxRS
 The PVts-β approach is implemented in R with the ForesToolboxRS package. This algorithm will allow to detect disturbances in the 
 forests using all the available Landsat set. In fact, it can also be run with sensors such as MODIS (Moderate Resolution 
