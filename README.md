@@ -8,6 +8,8 @@ has only one calibration parameter and iii) can be easily implemented by any sta
 
 For any work you will submit, credits from this algorithm must be given to: 
 
-Tarazona, Y., Mantas, V.M., Pereira, A.J.S.C. (2018). Improving tropical deforestation detection through using photosynthetic 
-vegetation time series – (PVts-β). Ecological Indicators, 94, 367–379.
+[Tarazona, Y., Mantas, V.M., Pereira, A.J.S.C. (2018). Improving tropical deforestation detection through using photosynthetic 
+vegetation time series – (PVts-β). Ecological Indicators, 94, 367–379.](https://doi.org/10.1016/j.ecolind.2018.07.012)
 
+
+# Getting Started
