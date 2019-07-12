@@ -15,3 +15,6 @@ vegetation time series – (PVts-β). Ecological Indicators, 94, 367–379.](htt
 
 
 # Getting Started
+```
+library()
+```
