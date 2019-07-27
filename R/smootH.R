@@ -32,7 +32,7 @@ smootH <- function(x, Interp="na.interp"){
 
   if (is.vector(x)) {
     x[x==0 | x== -1] <- NA
-    x[sum(!is.na(x))<=1]<-100
+    x[summary(x)[7] >= (length(x)-1)] <- 100
 
     # Type of interpolation
     if (Interp=="na.interp") {
@@ -59,7 +59,7 @@ smootH <- function(x, Interp="na.interp"){
 
     for (i in 1:dim(x)[1]) {
       x[i,][x[i,] == 0 | x[i,] == -1]<- NA
-      x[i,][sum(!is.na(x))<=1]<-100
+      x[i,][summary(x[i,])[7] >= (dim(x)[2]-1)] <- 100
 
     # Type of interpolation
       if (Interp=="na.interp") {
@@ -88,7 +88,7 @@ smootH <- function(x, Interp="na.interp"){
     np <- as.matrix(x)
     for (i in 1:dim(np)[1]) {
       np[i,][np[i,] == 0 | np[i,] == -1]<- NA
-      np[i,][sum(!is.na(np))<=1]<-100
+      np[i,][summary(np[i,])[7] >= (dim(np)[2]-1)] <- 100
 
       # Type of interpolation
       if (Interpolation=="na.interp") {
