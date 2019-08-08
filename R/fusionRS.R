@@ -50,7 +50,7 @@ fusionRS<- function(x, na=TRUE) {
       rownames(contri)[i] <- paste("Band", i, sep = "")
     }
 
-    # Almacenando en un raster stack
+    # Storing in a raster the principal components
     acpY <- x
     vr <- getValues(acpY)
     p <- which(!is.na(vr)) # Positions of NA
