@@ -19,6 +19,9 @@ Imports:
     forecast,
     parallel,
     raster,
+    rgdal,
     zoo,
+    factoextra,
+    FactoMineR,
 Suggests: 
     rmarkdown,

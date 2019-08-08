@@ -28,23 +28,23 @@
 #' plot(x, type="o", ylab="Reflectance %", xlab="Time")
 #' lines(smth, col="blue", type="o")
 #'
-smootH <- function(x, Interp="na.interp"){
+smootH <- function(x, interp="na.interp"){
 
   if (is.vector(x)) {
     x[x==0 | x== -1] <- NA
     x[summary(x)[7] >= (length(x)-1)] <- 100
 
     # Type of interpolation
-    if (Interp=="na.interp") {
+    if (interp=="na.interp") {
       x <- na.interp(x)
 
-    } else if (Interp=="na.StructTS") {
+    } else if (interp=="na.StructTS") {
       x <- na.StructTS(x)
 
-    } else if (Interp=="na.approx") {
+    } else if (interp=="na.approx") {
       x <- na.approx(x)
 
-    } else if (Interp=="na.spline") {
+    } else if (interp=="na.spline") {
       x <- na.spline(x)
 
     } else stop("Unsupported interpolation method")
@@ -62,16 +62,16 @@ smootH <- function(x, Interp="na.interp"){
       x[i,][summary(x[i,])[7] >= (dim(x)[2]-1)] <- 100
 
     # Type of interpolation
-      if (Interp=="na.interp") {
+      if (interp=="na.interp") {
         x[i,] <- na.interp(x[i,])
 
-      } else if (Interp=="na.StructTS") {
+      } else if (interp=="na.StructTS") {
         x[i,] <- na.StructTS(x[i,])
 
-      } else if (Interp=="na.approx") {
+      } else if (interp=="na.approx") {
         x[i,] <- na.approx(x[i,])
 
-      } else if (Interp=="na.spline") {
+      } else if (interp=="na.spline") {
         x[i,] <- na.spline(x[i,])
 
       } else stop("Unsupported interpolation method")
@@ -91,16 +91,16 @@ smootH <- function(x, Interp="na.interp"){
       np[i,][summary(np[i,])[7] >= (dim(np)[2]-1)] <- 100
 
       # Type of interpolation
-      if (Interpolation=="na.interp") {
+      if (interp=="na.interp") {
         np[i,] <- na.interp(np[i,])
 
-      } else if (Interpolation=="na.StructTS") {
+      } else if (interp=="na.StructTS") {
         np[i,] <- na.StructTS(np[i,])
 
-      } else if (Interpolation=="na.approx") {
+      } else if (interp=="na.approx") {
         np[i,] <- na.approx(np[i,])
 
-      } else if (Interpolation=="na.spline") {
+      } else if (interp=="na.spline") {
         np[i,] <- na.spline(np[i,])
 
       } else stop("Unsupported interpolation method")
