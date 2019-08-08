@@ -26,4 +26,5 @@ library(ForesToolboxRS)
 ?MosaicFreeCloud
 ?smootH
 ?pvts
+?fusionRS
 ```
