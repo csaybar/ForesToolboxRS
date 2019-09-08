@@ -2,6 +2,7 @@ library(testthat)
 library(ForesToolboxRS)
 library(stars)
 library(raster)
+library(rgdal)
 library(forecast)
 context("ForesToolboxRS::fusionRS")
 
