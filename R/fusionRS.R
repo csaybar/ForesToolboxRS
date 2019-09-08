@@ -20,7 +20,7 @@
 #' library(ForesToolboxRS)
 #' library(raster)
 #' data("ForesToolboxRS_dataset")
-#' img <- stack(lapply(ForesToolboxRS_dataset$mosaic, '[[',1))
+#' img <- brick(lapply(ForesToolboxRS_dataset$mosaic, '[[',1))
 #' img <- smootH(img)
 #' fusion <- fusionRS(x=img)
 #' plotRGB(fusion[[1]], axes=FALSE, stretch="lin",main ="Fused images")

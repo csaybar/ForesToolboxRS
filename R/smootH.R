@@ -96,7 +96,7 @@ smootH.RasterBrick  <- function(x, interp="na.interp", CLUSTER = NULL, ...) {
              CLUSTER =  CLUSTER) %>%
     st_set_dimensions(names = c('fun',"x","y")) %>%
     split('fun') -> x
-  raster::brick(mapply(function(z) as(x[z],'Raster'),seq_len(length(x))))
+  brick(mapply(function(z) as(x[z],'Raster'),seq_len(length(x))))
 }
 
 

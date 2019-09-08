@@ -11,6 +11,7 @@ ftb_whatkinditis <-function(x) {
     x
   } else if (is(x,'RasterLayer') | is(x,'RasterStack') | is(x,'RasterBrick')) {
     x = st_as_stars(x)
+    #stack(mapply(function(z) as(x[z],'Raster'),seq_len(length(x))))
   } else {
     stop(class(x), ' class is not supported')
   }
