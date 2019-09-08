@@ -31,7 +31,7 @@ smootH(x, interp = "na.interp", CLUSTER = NULL, ...)
 "na.StructTS", "na.approx" and "na.spline". By default is the method
 "na.interp".}
 
-\item{CLUSTER}{cluster to use for parallel apply; see \[parallel]{makeCluster}}
+\item{CLUSTER}{cluster to use for parallel apply; see \link[parallel]{makeCluster}}
 
 \item{...}{ignored}
 }

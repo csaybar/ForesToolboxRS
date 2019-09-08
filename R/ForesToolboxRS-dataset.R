@@ -1,4 +1,4 @@
-#' ftb_datasets: ForestToolboxRS calculated from Landsat 8 Imagery
+#' ForesToolboxRS_dataset: ForestToolboxRS calculated from Landsat 8 Imagery
 #'
 #'These images are part of the datasets used in Tarazona et al., 2018 (see notes)
 #'covering a deforestation hotspot region ubicated in Madre de Dios, a province

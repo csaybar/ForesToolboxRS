@@ -13,12 +13,13 @@
 #' deforestation detection through using photosynthetic vegetation time
 #' series – (PVts). Ecological Indicators, 94, 367 379.
 #' @param x object of class numeric, matrix, RasterStack, RasterBrick or stars
-#' @param CLUSTER cluster to use for parallel apply; see \[parallel]{makeCluster}
+#' @param CLUSTER cluster to use for parallel apply; see \link[parallel]{makeCluster}
 #' @param interp Four interpolation methods are presented, "na.interp",
 #' "na.StructTS", "na.approx" and "na.spline". By default is the method
 #' "na.interp".
 #' @param ... ignored
 #' @importFrom stars st_set_dimensions st_apply st_as_stars
+#' @importFrom raster stack brick
 #' @importFrom parallel parApply
 #' @importFrom methods as
 #' @importFrom forecast na.interp
@@ -74,7 +75,7 @@ smootH.RasterStack  <- function(x, interp="na.interp", CLUSTER = NULL, ...) {
              CLUSTER =  CLUSTER) %>%
     st_set_dimensions(names = c('fun',"x","y")) %>%
     split('fun') -> x
-  raster::stack(mapply(function(z) as(x[z],'Raster'),seq_len(length(x))))
+  stack(mapply(function(z) as(x[z],'Raster'),seq_len(length(x))))
 }
 
 
