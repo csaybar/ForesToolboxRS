@@ -1,7 +1,7 @@
 Package: ForesToolboxRS
 Type: Package
 Title: Remote Sensing Tools for Forest Monitoring
-Version: 0.0.2
+Version: 0.0.3
 Authors@R: 
     c(person(given = "Yonatan",
              family = "Tarazona Coronel",
@@ -31,7 +31,6 @@ Imports:
     raster,
     zoo,
     factoextra,
-    rgdal,
     Rcpp,
     magrittr
 Suggests: 

@@ -9,3 +9,5 @@
 .deploy_dir
 ^Dockerfile$
 ^\.github$
+^docs$
+^pkgdown$

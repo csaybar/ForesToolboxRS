@@ -31,8 +31,10 @@ sensors or from the same sensor have a co-registration.
 \examples{
 library(ForesToolboxRS)
 library(raster)
-data("ForesToolboxRS_dataset")
-img <- brick(lapply(ForesToolboxRS_dataset$mosaic, '[[',1))
+rasterio = list(nXOff = 250, nYOff = 250)
+img <- system.file("simple_mosaic", package="ForesToolboxRS") \%>\%
+  list.files(full.names = TRUE) \%>\%
+  read_stars(RasterIO = rasterio)
 img <- smootH(img)
 fusion <- fusionRS(x=img)
 plotRGB(fusion[[1]], axes=FALSE, stretch="lin",main ="Fused images")

@@ -1,5 +1,9 @@
 # ForesToolboxRS version 0.0.2
 
+* **MosaicFreeCloud.R** added.
+
+# ForesToolboxRS version 0.0.2
+
 * **fusionRS.R** added.
 * pkdown (webpage) updated.
 * Improving the documentation and examples.
