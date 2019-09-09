@@ -152,7 +152,7 @@ MosaicFreeCloud.stars <- function(img, time, CLUSTER = NULL, fit_negative = TRUE
       st_set_dimensions(names = c("x", "y", "band", "time")) %>%
       mosaic_4D(time, CLUSTER, fit_negative) -> img
     if (RasterLayer) {
-      img <- brick(mapply(function(z) as(img, "Raster"), seq_len(length(img))))
+      img <- brick(mapply(function(z) as(img[z], "Raster"), seq_len(length(img))))
     }
     return(img)
   }

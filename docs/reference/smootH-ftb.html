@@ -67,7 +67,7 @@ smoothing is used (see References)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ForesToolboxRS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
       </span>
     </div>
 
@@ -164,14 +164,21 @@ series – (PVts). Ecological Indicators, 94, 367 379.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ForesToolboxRS</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>forecast</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>zoo</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘zoo’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    as.Date, as.Date.numeric</span></div><div class='input'>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>stars</span>)
+
+<span class='co'># Example 1</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>80</span>,<span class='fl'>78</span>,<span class='fl'>75</span>,<span class='fl'>76</span>,<span class='fl'>79</span>,-<span class='fl'>100</span>,<span class='fl'>82</span>,<span class='fl'>76</span>,<span class='fl'>81</span>,<span class='fl'>77</span>,<span class='fl'>76</span>)
 <span class='no'>smth</span> <span class='kw'>&lt;-</span> <span class='fu'>smootH</span>(<span class='no'>x</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"o"</span>, <span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>"Reflectance %"</span>, <span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>"Time"</span>)</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/lines'>lines</a></span>(<span class='no'>smth</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"blue"</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"o"</span>)</div><div class='img'><img src='smootH-ftb-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"o"</span>, <span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>"Reflectance %"</span>, <span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>"Time"</span>)</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/lines'>lines</a></span>(<span class='no'>smth</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"blue"</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"o"</span>)</div><div class='img'><img src='smootH-ftb-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Example 2</span>
+<span class='no'>rasterio</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>nXOff</span> <span class='kw'>=</span> <span class='fl'>250</span>, <span class='kw'>nYOff</span> <span class='kw'>=</span> <span class='fl'>250</span>)
+<span class='no'>pv_serie</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"PVts"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"ForesToolboxRS"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list.files'>list.files</a></span>(<span class='st'>"\\.tif$"</span>,<span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/stars/topics/read_stars'>read_stars</a></span>(<span class='kw'>RasterIO</span> <span class='kw'>=</span> <span class='no'>rasterio</span>)
+<span class='no'>pv_serie_stars</span> <span class='kw'>&lt;-</span> <span class='fu'>smootH</span>(<span class='no'>pv_serie</span>)
+<span class='no'>smoth_mean</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stars/topics/st_apply'>st_apply</a></span>(<span class='no'>pv_serie_stars</span> <span class='kw'>%&gt;%</span> <span class='no'>merge</span>,<span class='fl'>1</span>:<span class='fl'>2</span>,<span class='no'>mean</span>)
+<span class='no'>simple_mean</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stars/topics/st_apply'>st_apply</a></span>(<span class='no'>pv_serie</span> <span class='kw'>%&gt;%</span> <span class='no'>merge</span>,<span class='fl'>1</span>:<span class='fl'>2</span>,<span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='no'>x</span>,<span class='kw'>na.rm</span><span class='kw'>=</span><span class='fl'>TRUE</span>))
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>smoth_mean</span>,<span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"SmootH mean"</span>)</div><div class='img'><img src='smootH-ftb-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>simple_mean</span>,<span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Simple mean"</span>)</div><div class='img'><img src='smootH-ftb-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

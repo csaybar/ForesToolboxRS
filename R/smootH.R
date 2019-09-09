@@ -26,13 +26,24 @@
 #' @importFrom zoo na.spline na.approx
 #' @examples
 #' library(ForesToolboxRS)
-#' library(forecast)
-#' library(zoo)
+#' library(stars)
 #'
+#' # Example 1
 #' x <- c(80,78,75,76,79,-100,82,76,81,77,76)
 #' smth <- smootH(x)
 #' plot(x, type="o", ylab="Reflectance %", xlab="Time")
 #' lines(smth, col="blue", type="o")
+#'
+#' # Example 2
+#' rasterio <- list(nXOff = 250, nYOff = 250)
+#' pv_serie <- system.file("PVts", package="ForesToolboxRS") %>%
+#'   list.files("\\.tif$",full.names = TRUE) %>%
+#'   read_stars(RasterIO = rasterio)
+#' pv_serie_stars <- smootH(pv_serie)
+#' smoth_mean <- st_apply(pv_serie_stars %>% merge,1:2,mean)
+#' simple_mean <- st_apply(pv_serie %>% merge,1:2,function(x) mean(x,na.rm=TRUE))
+#' plot(smoth_mean,main = "SmootH mean")
+#' plot(simple_mean,main = "Simple mean")
 #' @export
 smootH <- function(x, interp="na.interp", CLUSTER=NULL, ...) {
   UseMethod("smootH")
