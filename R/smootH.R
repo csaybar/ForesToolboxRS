@@ -11,27 +11,39 @@
 #'
 #' Tarazona, Y., Mantas, V.M., Pereira, A.J.S.C. (2018). Improving tropical
 #' deforestation detection through using photosynthetic vegetation time
-#' series – (PVts-β). Ecological Indicators, 94, 367 379.
+#' series – (PVts). Ecological Indicators, 94, 367 379.
 #' @param x object of class numeric, matrix, RasterStack, RasterBrick or stars
-#' @param CLUSTER cluster to use for parallel apply; see \[parallel]{makeCluster}
+#' @param CLUSTER cluster to use for parallel apply; see \link[parallel]{makeCluster}
 #' @param interp Four interpolation methods are presented, "na.interp",
 #' "na.StructTS", "na.approx" and "na.spline". By default is the method
 #' "na.interp".
 #' @param ... ignored
 #' @importFrom stars st_set_dimensions st_apply st_as_stars
+#' @importFrom raster stack brick
 #' @importFrom parallel parApply
 #' @importFrom methods as
 #' @importFrom forecast na.interp
 #' @importFrom zoo na.spline na.approx
 #' @examples
 #' library(ForesToolboxRS)
-#' library(forecast)
-#' library(zoo)
+#' library(stars)
 #'
+#' # Example 1
 #' x <- c(80,78,75,76,79,-100,82,76,81,77,76)
 #' smth <- smootH(x)
 #' plot(x, type="o", ylab="Reflectance %", xlab="Time")
 #' lines(smth, col="blue", type="o")
+#'
+#' # Example 2
+#' rasterio <- list(nXOff = 250, nYOff = 250)
+#' pv_serie <- system.file("PVts", package="ForesToolboxRS") %>%
+#'   list.files("\\.tif$",full.names = TRUE) %>%
+#'   read_stars(RasterIO = rasterio)
+#' pv_serie_stars <- smootH(pv_serie)
+#' smoth_mean <- st_apply(pv_serie_stars %>% merge,1:2,mean)
+#' simple_mean <- st_apply(pv_serie %>% merge,1:2,function(x) mean(x,na.rm=TRUE))
+#' plot(smoth_mean,main = "SmootH mean")
+#' plot(simple_mean,main = "Simple mean")
 #' @export
 smootH <- function(x, interp="na.interp", CLUSTER=NULL, ...) {
   UseMethod("smootH")
@@ -74,7 +86,7 @@ smootH.RasterStack  <- function(x, interp="na.interp", CLUSTER = NULL, ...) {
              CLUSTER =  CLUSTER) %>%
     st_set_dimensions(names = c('fun',"x","y")) %>%
     split('fun') -> x
-  raster::stack(mapply(function(z) as(x[z],'Raster'),seq_len(length(x))))
+  stack(mapply(function(z) as(x[z],'Raster'),seq_len(length(x))))
 }
 
 
@@ -95,7 +107,7 @@ smootH.RasterBrick  <- function(x, interp="na.interp", CLUSTER = NULL, ...) {
              CLUSTER =  CLUSTER) %>%
     st_set_dimensions(names = c('fun',"x","y")) %>%
     split('fun') -> x
-  raster::brick(mapply(function(z) as(x[z],'Raster'),seq_len(length(x))))
+  brick(mapply(function(z) as(x[z],'Raster'),seq_len(length(x))))
 }
 
 

@@ -1,3 +1,26 @@
+# ForesToolboxRS 0.0.4
+
+* **pvts.R** added.
+* tidyverse r style used as a standard.
+* General bugs fixed related to NAMESPACE.
+
+# ForesToolboxRS 0.0.3
+
+* **MosaicFreeCloud.R** added.
+* adding new examples to mosaic.
+* General bugs fixed related to NAMESPACE.
+
+# ForesToolboxRS 0.0.2
+
+* **fusionRS.R** added.
+* pkdown (webpage) updated.
+* Improving the documentation and examples.
+
+# ForesToolboxRS 0.0.1
+
+* **smootH** Rcpp hamunyela 
+* first release
+=======
 # ForesToolboxRS version 0.0.2
 
 * The **ftb_hamunyela** code was passed of R to C++ (~ 5 to 50x faster).

@@ -26,3 +26,10 @@ test_that("utils-error", {
   tif = 1
   expect_error(ForesToolboxRS:::ftb_whatkinditis(tif))
 })
+
+test_that("nd-stars", {
+  f <- system.file("external/test.grd", package="raster")
+  f <- stack(f,f,f)
+  mess <- is_nD(f)
+  expect_equal('3D', mess)
+})

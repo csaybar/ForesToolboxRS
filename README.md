@@ -1,6 +1,6 @@
 
 [![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/csaybar/ForesToolboxRS?branch=master&svg=true)](https://ci.appveyor.com/project/csaybar/ForesToolboxRS)
+status](https://ci.appveyor.com/api/projects/status/github/csaybar/forestoolboxrs?branch=dev&svg=true)](https://ci.appveyor.com/project/csaybar/forestoolboxrs)
 [![Travis build
 status](https://travis-ci.org/csaybar/ForesToolboxRS.svg?branch=master)](https://travis-ci.org/csaybar/ForesToolboxRS)
 [![License:

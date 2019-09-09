@@ -5,6 +5,12 @@ library(raster)
 library(forecast)
 context("ForesToolboxRS::smootH")
 
+pv_serie <- system.file("PVts", package="ForesToolboxRS") %>%
+  list.files("\\.tif$",full.names = TRUE) %>%
+  stack %>%
+  brick
+
+
 #tarazona code
 smootH_ytarazona <- function(x, interp="na.interp"){
 
@@ -117,10 +123,9 @@ test_that("smootH numeric-na.spline", {
   expect_equal(mean(suavizado),6.423077, tolerance = 0.00001)
 })
 
+
 test_that("smootH matrix", {
-  data("ForesToolboxRS_dataset")
-  pv_serie <- ForesToolboxRS_dataset$PVts
-  pv_serie_matrix <- raster::as.matrix(pv_serie)
+  pv_serie_matrix <- raster::as.matrix(pv_serie)[1:100,]
   ytarazona_results <- smootH_ytarazona(pv_serie_matrix)
   new_approach <- smootH(pv_serie_matrix)
   expect_equal(ytarazona_results,new_approach, check.attributes = FALSE, tolerance = 0.00001)
@@ -128,27 +133,23 @@ test_that("smootH matrix", {
 
 
 test_that("smootH RasterStack", {
-  data("ForesToolboxRS_dataset")
-  pv_serie <- ForesToolboxRS_dataset$PVts
-  pv_serie_stk <- raster::stack(pv_serie)
+  pv_serie_stk <- raster::stack(pv_serie) %>%
+    aggregate(fact=10)
   ytarazona_results <- smootH_ytarazona(pv_serie_stk)
   new_approach <- smootH(pv_serie_stk)
   expect_equal(ytarazona_results,raster::as.matrix(new_approach), check.attributes = FALSE, tolerance = 0.00001)
 })
 
 test_that("smootH RasterBrick", {
-  data("ForesToolboxRS_dataset")
-  pv_serie <- ForesToolboxRS_dataset$PVts
-  pv_serie_brk <- pv_serie
+  pv_serie_brk <- pv_serie %>%
+    aggregate(fact=10)
   ytarazona_results <- smootH_ytarazona(pv_serie_brk)
   new_approach <- smootH(pv_serie_brk)
   expect_equal(ytarazona_results,raster::as.matrix(new_approach), check.attributes = FALSE, tolerance = 0.00001)
 })
 
 test_that("smootH stars", {
-  data("ForesToolboxRS_dataset")
-  pv_serie <- ForesToolboxRS_dataset$PVts
-  pv_serie_brk <- smootH(pv_serie)
-  pv_serie_stars <- smootH(st_as_stars(pv_serie)) %>% merge
+  pv_serie_brk <- smootH(aggregate(pv_serie, fact=10))
+  pv_serie_stars <- smootH(st_as_stars(aggregate(pv_serie, fact=10))) %>% merge
   expect_equal(mean(raster::getValues(raster::mean(pv_serie_brk))),mean(pv_serie_stars$X), tolerance = 0.00001)
 })
