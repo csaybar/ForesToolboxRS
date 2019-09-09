@@ -31,6 +31,7 @@ Imports:
     raster,
     zoo,
     factoextra,
+    rgdal,
     Rcpp,
     magrittr
 Suggests: 

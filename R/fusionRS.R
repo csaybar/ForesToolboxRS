@@ -19,7 +19,7 @@
 #' @examples
 #' library(ForesToolboxRS)
 #' library(raster)
-#' rasterio = list(nXOff = 250, nYOff = 250)
+#' rasterio = list(nXOff = 50, nYOff = 50)
 #' img <- system.file("simple_mosaic", package="ForesToolboxRS") %>%
 #'   list.files(full.names = TRUE) %>%
 #'   read_stars(RasterIO = rasterio)

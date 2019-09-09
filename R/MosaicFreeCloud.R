@@ -31,7 +31,7 @@
 #' library(raster)
 #' library(stars)
 #' time <- as.Date(c("2016-07-30","2016-08-15","2016-09-16"))
-#' rasterio = list(nXOff = 250, nYOff = 250, bands = c(4,3,2))
+#' rasterio = list(nXOff = 50, nYOff = 50, bands = c(4,3,2))
 #'
 #' ## Create a mosaic using three landsat images (just one band)
 #' img <- system.file("simple_mosaic", package="ForesToolboxRS") %>%
@@ -76,7 +76,11 @@ MosaicFreeCloud.character <- function(img, time, CLUSTER = NULL, fit_negative = 
       merge() %>%
       st_set_dimensions(names = c("x", "y", "time")) %>%
       mosaic_3D(time, CLUSTER, fit_negative) -> x
-    if (RasterLayer) return(as(x, "Raster")) else return(x)
+    if (RasterLayer) {
+      return(as(x, "Raster"))
+    } else {
+      return(x)
+    }
   } else if (is_nD(img) == "4D") {
     x %>%
       merge() %>%
@@ -99,7 +103,12 @@ MosaicFreeCloud.RasterStack <- function(img, time, CLUSTER = NULL, fit_negative 
   img %>%
     st_as_stars() %>%
     st_set_dimensions(names = c("x", "y", "time")) %>%
-    mosaic_3D(time, CLUSTER, fit_negative)
+    mosaic_3D(time, CLUSTER, fit_negative) -> img
+  if (RasterLayer) {
+    return(as(img, "Raster"))
+  } else {
+    return(img)
+  }
 }
 
 #' @name mosaic-free-cloud
@@ -109,7 +118,12 @@ MosaicFreeCloud.RasterBrick <- function(img, time, CLUSTER = NULL, fit_negative 
   img %>%
     st_as_stars() %>%
     st_set_dimensions(names = c("x", "y", "time")) %>%
-    mosaic_3D(time, CLUSTER, fit_negative)
+    mosaic_3D(time, CLUSTER, fit_negative) -> img
+  if (RasterLayer) {
+    return(as(img, "Raster"))
+  } else {
+    return(img)
+  }
 }
 
 #' @name mosaic-free-cloud
