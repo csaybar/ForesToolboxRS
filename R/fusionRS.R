@@ -7,7 +7,6 @@
 #'
 #' @section References:
 #' Tarazona et al...
-#'
 #' @section Note:
 #' Before executing the function, it is recommended that images coming from different
 #' sensors or from the same sensor have a co-registration.
@@ -20,8 +19,16 @@
 #' library(raster)
 #' library(factoextra)
 #'
-#'## Not run:
-#'img <- stack(list("~/bands"))
+#'# Not run:
+#'# Optical images
+#'b1 <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
+#'b2 <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
+#'
+#'# Radar images
+#'vv <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
+#'# Stack
+#'img <- stack(b1,b2,vv)
+#'# Fusion
 #'fusion <- fusionRS(x=img)
 #'plotRGB(fusion[[1]], 1,2,3, axes=F, stretch="lin",main ="Fused images")
 #'
