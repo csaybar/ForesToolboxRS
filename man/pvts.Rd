@@ -62,10 +62,10 @@ vec <- c(0.86, 0.93, 0.97, 0.91, 0.95, 0.96,
          0.46, 0.20, 0.27, 0.22, 0.52, 0.63,
          0.61, 0.67, 0.64, 0.86)
 cd <- pvts(x = vec, start = 18, end = 19, threshold = 5)
-\dontrun{
 #Example 2.
+#Change monitoring period 2006-2016. Where 2000 is position 1 and
+#2004 is position 5
 imgs <- brick(system.file("evi/evi20002016.tif", package="ForesToolboxRS"))
 cd <- pvts(x=imgs, startm=1, endm=5, threshold=3) # EVI indices
 plot(cd)
-}
 }

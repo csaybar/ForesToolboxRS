@@ -14,6 +14,9 @@
 #' @param x RasterStack, RasterBrick
 #' @param na If TRUE the NA values of the images will be omitted from the analysis.
 #' @importFrom raster as.data.frame
+#' @importFrom stats prcomp na.omit
+#' @importFrom raster getValues as.data.frame brick
+#' @importFrom factoextra get_pca_var
 #' @examples
 #' library(ForesToolboxRS)
 #' library(raster)
