@@ -145,9 +145,6 @@ na_interpolation <- function(x, interp = 'na.interp') {
   if (interp=="na.interp") {
     x <- na.interp(x)
 
-    #} else if (interp=="na.StructTS") {
-    #    x <- na.StructTS(x)
-
   } else if (interp=="na.approx") {
     x <- na.approx(x, na.rm = FALSE)
 

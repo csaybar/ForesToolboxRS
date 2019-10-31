@@ -7,25 +7,29 @@
 #'
 #' @section References:
 #' Tarazona et al...
-#'
 #' @section Note:
 #' Before executing the function, it is recommended that images coming from different
 #' sensors or from the same sensor have a co-registration.
+#'
+#' @param x RasterStack, RasterBrick
+#' @param na If TRUE the NA values of the images will be omitted from the analysis.
+#' @importFrom raster as.data.frame
 #' @importFrom stats prcomp na.omit
 #' @importFrom raster getValues as.data.frame brick
 #' @importFrom factoextra get_pca_var
-#' @param x RasterStack, RasterBrick
-#' @param na If TRUE the NA values of the images will be omitted from the analysis.
 #' @examples
 #' library(ForesToolboxRS)
 #' library(raster)
-#' rasterio = list(nXOff = 50, nYOff = 50)
-#' img <- system.file("simple_mosaic", package="ForesToolboxRS") %>%
-#'   list.files(full.names = TRUE) %>%
-#'   read_stars(RasterIO = rasterio)
-#' img <- smootH(img)
+#' library(factoextra)
+#' b1 <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
+#' b2 <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
+#' # Radar images
+#' vv <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
+#' # Stack
+#' img <- stack(b1,b2,vv)
+#' # Fusion
 #' fusion <- fusionRS(x=img)
-#' plotRGB(fusion[[1]], axes=FALSE, stretch="lin",main ="Fused images")
+#' plotRGB(fusion[[1]], 1,2,3, axes=F, stretch="lin",main ="Fused images")
 #' @export
 fusionRS <- function(x, na = TRUE) {
   if (is(x,'stars')) {

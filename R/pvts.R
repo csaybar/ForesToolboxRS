@@ -1,3 +1,4 @@
+
 #' Change detection using the PVts-\eqn{\beta} approach
 #'
 #' This algorithm will allow to detect disturbances in the forests using
@@ -7,7 +8,7 @@
 #' @section References:
 #' Tarazona, Y., Mantas, V.M., Pereira, A.J.S.C. (2018). Improving tropical
 #' deforestation detection through using photosynthetic vegetation time
-#' series – (PVts-b). Ecological Indicators, 94, 367 379.
+#' series – (PVts-\eqn{\beta}). Ecological Indicators, 94, 367 379.
 #' @section Note:
 #' In order to optimise the detections, it is advisable to make a smoothing
 #' through the \link[ForesToolboxRS]{smootH} function before detecting changes. The smoothing will
@@ -16,16 +17,18 @@
 #'
 #' @param x Vector, Matrix, RasterStack, RasterBrick
 #' @param startm The start of the monitoring time
-#' @param endm The end of the monitoring time (The year in which changes will be detected)
+#' @param endm The end of the monitoring time
 #' @param threshold The default threshold is 5 for photosynthetic vegetation,
 #' while for indices such as NDVI and EVI the threshold is 3.
 #' Please see Tarazona et al. (2018) for more details.
-#' @param img The image of the monitoring start position, i.e. "start" position (in case "x" is a matrix)
+#' @param img The image of the position immediately before the monitoring start,
+#' i.e. the "start-1" position (in case "x" is a matrix).
 #' @param tr The vector of the analysis time range must contain the start time of the
 #' time series, the end time and the frequency of the series. For example:
 #' tr <- c(1990, 2017, 1) (i.e., the time series starts in 1990, ends in 2017 and
 #' has an annual frequency of 1). See \link[stats]{ts} for more details.
-#' @param time If it is TRUE the plotting will be with time coordinates.
+#' @param time If it is TRUE the plotting will be with time coordinates
+#' (only if the "tr" parameter is within the function).
 #' @importFrom stats sd time ts
 #' @importFrom graphics points abline polygon text grid legend plot
 #' @importFrom grDevices adjustcolor
@@ -44,15 +47,12 @@
 #'          0.46, 0.20, 0.27, 0.22, 0.52, 0.63,
 #'          0.61, 0.67, 0.64, 0.86)
 #' cd <- pvts(x = vec, start = 18, end = 19, threshold = 5)
-#' \dontrun{
 #' #Example 2.
-#' #imgs <- as.matrix(stack(img_list)) # imgs is a matrix
-#' #dim(imgs)[1]= 1000 # is the number of pixels (time series)
-#' #dim(imgs)[2]=29 # is the number of images between 1990 and 2018
-#' ## Change monitoring period 2015-2018. 2015(position 26),2018(position 29)
-#' #cd <- pvts(x=imgs, start=26, end=29, threshold=5,img=lastimg)
-#' #plot(cd)
-#' }
+#' #Change monitoring period 2006-2016. Where 2000 is position 1 and
+#' #2004 is position 5
+#' imgs <- brick(system.file("evi/evi20002016.tif", package="ForesToolboxRS"))
+#' cd <- pvts(x=imgs, startm=1, endm=5, threshold=3) # EVI indices
+#' plot(cd)
 #' @export
 pvts <- function(x, startm, endm, threshold = 5, img, tr, time = FALSE) {
   if (is(x, "vector")) {
@@ -67,6 +67,7 @@ pvts <- function(x, startm, endm, threshold = 5, img, tr, time = FALSE) {
       stop("Breakpoint not detected")
     }
   } else if (is(x, "matrix")) {
+    #DONT WORK
     breakR <- img
     mean <- apply(x[, 1:startm], 1, mean)
     std <- apply(x[, 1:startm], 1, sd)
@@ -74,20 +75,28 @@ pvts <- function(x, startm, endm, threshold = 5, img, tr, time = FALSE) {
     values(breakR) <- cd
     breakR[img < 80 | img < 0.8] <- 0
   } else if (is(x, "RasterStack") | is(x, "RasterBrick")) {
-    breakR <- x[[endm]]
-    x <- as.matrix(x)
-    mean <- apply(x[, 1:startm], 1, mean)
-    std <- apply(x[, 1:startm], 1, sd)
-    cd <- ifelse(x[, endm] < (mean - threshold * std), 1, 0)
-    values(breakR) <- cd
-    breakR[img < 80 | img < 0.8] <- 0
+    sd_na <- function(x) sd(x,na.rm=TRUE)
+    mean_na <- function(x) mean(x,na.rm=TRUE)
+
+    if (missing(img)) {
+      img <- x[[nlayers(x)]]
+      #img <- mean_na(x)
+    }
+
+    period_base <- x[[startm:endm]]
+    r_mean <- calc(period_base, mean_na)
+    r_std <- calc(period_base, sd_na)
+
+    cd <- img < (r_mean - threshold*r_std)
+
+    mask_value <- ((img > 80) | (img < 0.8))
+    breakR <- cd*!mask_value
+
   } else {
     stop(class(x), " class is not supported")
   }
-
   return(breakR)
 }
-
 
 #' plot pvts
 #' @noRd

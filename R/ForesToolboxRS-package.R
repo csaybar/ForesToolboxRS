@@ -1,3 +1,4 @@
 #' @useDynLib ForesToolboxRS
 #' @importFrom Rcpp sourceCpp
-NULL
+#' @keywords internal
+"_PACKAGE"
