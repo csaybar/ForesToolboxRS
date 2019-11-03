@@ -4,9 +4,12 @@
     <loc>http://csaybar.github.io/ForesToolboxRS/index.html</loc>
   </url>
   <url>
+<<<<<<< HEAD
     <loc>http://csaybar.github.io/ForesToolboxRS/reference/ForesToolboxRS-package.html</loc>
   </url>
   <url>
+=======
+>>>>>>> dev
     <loc>http://csaybar.github.io/ForesToolboxRS/reference/fusionRS.html</loc>
   </url>
   <url>

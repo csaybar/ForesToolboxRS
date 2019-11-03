@@ -43,10 +43,14 @@
 
 
 <meta property="og:title" content="Change detection using the PVts-\(\beta\) approach — pvts" />
+<<<<<<< HEAD
 <meta property="og:description" content="This algorithm will allow to detect disturbances in the forests using
 all the available Landsat set. In fact, it can also be run with sensors
 such as MODIS." />
 <meta property="og:image" content="http://csaybar.github.io/ForesToolboxRS/logo.png" />
+=======
+<meta property="og:description" content="Change detection using the PVts-\(\beta\) approach" />
+>>>>>>> dev
 <meta name="twitter:card" content="summary" />
 
 
@@ -79,7 +83,7 @@ such as MODIS." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ForesToolboxRS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -98,6 +102,10 @@ such as MODIS." />
     <span class="fas fa fas fa-book"></span>
      
     Articles
+<<<<<<< HEAD
+     
+    <span class="caret"></span>
+=======
      
     <span class="caret"></span>
   </a>
@@ -112,6 +120,20 @@ such as MODIS." />
     <span class="fa fa-question-circle-o"></span>
      
     faq
+>>>>>>> dev
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/installation.html">Installation</a>
+    </li>
+  </ul>
+</li>
+<li>
+<<<<<<< HEAD
+  <a href="../articles/faq.html">
+    <span class="fa fa-question-circle-o"></span>
+     
+    faq
   </a>
 </li>
 <li>
@@ -122,6 +144,15 @@ such as MODIS." />
   </a>
 </li>
 <li>
+=======
+  <a href="../news/index.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    news
+  </a>
+</li>
+<li>
+>>>>>>> dev
   <a href="../reference/index.html">
     <span class="fa fa-file-code-o"></span>
      
@@ -154,12 +185,11 @@ such as MODIS." />
     </div>
 
     <div class="ref-description">
-    <p>This algorithm will allow to detect disturbances in the forests using
-all the available Landsat set. In fact, it can also be run with sensors
-such as MODIS.</p>
+    <p>Change detection using the PVts-\(\beta\) approach</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pvts</span>(<span class='no'>x</span>, <span class='no'>startm</span>, <span class='no'>endm</span>, <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='no'>img</span>, <span class='no'>tr</span>, <span class='kw'>time</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>pvts</span>(<span class='no'>x</span>, <span class='no'>startm</span>, <span class='no'>endm</span>, <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='no'>img</span>, <span class='no'>tr</span>, <span class='kw'>time</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>vf</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,6 +228,14 @@ has an annual frequency of 1). See <a href='https://rdrr.io/r/stats/ts.html'>ts<
       <th>time</th>
       <td><p>If it is TRUE the plotting will be with time coordinates
 (only if the "tr" parameter is within the function).</p></td>
+<<<<<<< HEAD
+=======
+    </tr>
+    <tr>
+      <th>vf</th>
+      <td><p>If the monitoring is with Photosynthetic Vegetation series,
+then switch to TRUE.</p></td>
+>>>>>>> dev
     </tr>
     </table>
 
@@ -219,12 +257,21 @@ of atmospheric artifacts.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ForesToolboxRS</span>)
+<<<<<<< HEAD
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>raster</span>)
 <span class='no'>img_list</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"PVts"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"ForesToolboxRS"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='st'>"\\.tif$"</span>,<span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+=======
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>forecast</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>raster</span>)
+
+>>>>>>> dev
 <span class='co'># Example 1.</span>
-<span class='co'># photosynthetic vegetation time series between 1990 and 2017.</span>
+<span class='no'>vec</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.86</span>,<span class='fl'>0.93</span>,<span class='fl'>0.97</span>,<span class='fl'>0.91</span>,<span class='fl'>0.95</span>,<span class='fl'>0.96</span>,<span class='fl'>0.91</span>,<span class='fl'>0.88</span>,<span class='fl'>0.92</span>,<span class='fl'>0.89</span>,<span class='fl'>0.90</span>,<span class='fl'>0.89</span>,<span class='fl'>0.91</span>,<span class='fl'>0.92</span>,<span class='fl'>0.89</span>,
+         <span class='fl'>0.90</span>,<span class='fl'>0.92</span>,<span class='fl'>0.84</span>,<span class='fl'>0.46</span>,<span class='fl'>0.20</span>,<span class='fl'>0.27</span>,<span class='fl'>0.22</span>,<span class='fl'>0.52</span>,<span class='fl'>0.63</span>,<span class='fl'>0.61</span>,<span class='fl'>0.67</span>,<span class='fl'>0.64</span>,<span class='fl'>0.86</span>) <span class='co'># photosynthetic vegetation</span>
+<span class='co'># time series between 1990 and 2017</span>
 <span class='co'># We will detect changes in 2008 (position 19)</span>
+<<<<<<< HEAD
 <span class='no'>vec</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.86</span>, <span class='fl'>0.93</span>, <span class='fl'>0.97</span>, <span class='fl'>0.91</span>, <span class='fl'>0.95</span>, <span class='fl'>0.96</span>,
          <span class='fl'>0.91</span>, <span class='fl'>0.88</span>, <span class='fl'>0.92</span>, <span class='fl'>0.89</span>, <span class='fl'>0.90</span>, <span class='fl'>0.89</span>,
          <span class='fl'>0.91</span>, <span class='fl'>0.92</span>, <span class='fl'>0.89</span>, <span class='fl'>0.90</span>, <span class='fl'>0.92</span>, <span class='fl'>0.84</span>,
@@ -236,6 +283,18 @@ of atmospheric artifacts.</p>
 <span class='no'>imgs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/brick.html'>brick</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"evi/evi20002016.tif"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"ForesToolboxRS"</span>))
 <span class='no'>cd</span> <span class='kw'>&lt;-</span> <span class='fu'>pvts</span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>imgs</span>, <span class='kw'>startm</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>endm</span><span class='kw'>=</span><span class='fl'>5</span>, <span class='kw'>threshold</span><span class='kw'>=</span><span class='fl'>3</span>) <span class='co'># EVI indices</span>
 <span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span>(<span class='no'>cd</span>)</div><div class='img'><img src='pvts-2.png' alt='' width='700' height='433' /></div></pre>
+=======
+<span class='no'>cd</span> <span class='kw'>&lt;-</span> <span class='fu'>pvts</span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>vec</span>, <span class='kw'>startm</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>endm</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>threshold</span><span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='img'><img src='pvts-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Example 2.</span>
+<span class='no'>imgs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"PVts"</span>,<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ForesToolboxRS"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/raster/man/stack.html'>stack</a></span>()
+
+<span class='co'># Change monitoring period 2006-2016. Where 2006 is position 7 and 2016 is position 16</span>
+<span class='no'>cd</span> <span class='kw'>&lt;-</span> <span class='fu'>pvts</span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>imgs</span>, <span class='kw'>startm</span><span class='kw'>=</span><span class='fl'>7</span>, <span class='kw'>endm</span><span class='kw'>=</span><span class='fl'>16</span>, <span class='kw'>threshold</span><span class='kw'>=</span><span class='fl'>3</span>) <span class='co'># EVI indices</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span>(<span class='no'>cd</span>)</div><div class='img'><img src='pvts-2.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
+>>>>>>> dev
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -246,6 +305,11 @@ of atmospheric artifacts.</p>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    <p>Yonatan Tarazona</p>
+<p>This algorithm will allow to detect disturbances in the forests using
+all the available Landsat set. In fact, it can also be run with sensors
+such as MODIS.</p>
   </div>
 </div>
 
