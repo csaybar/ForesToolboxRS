@@ -8,13 +8,6 @@
 
 <title>Fusion of images with different observation geometry. — fusionRS • ForesToolboxRS</title>
 
-<!-- favicons -->
-<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -47,7 +40,6 @@
 (e.g., optical-optical, optical and SAR or SAR-SAR). Among many of the qualities
 of this function, it is possible to obtain the contribution (
 in the fused image." />
-<meta property="og:image" content="http://csaybar.github.io/ForesToolboxRS/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -80,7 +72,7 @@ in the fused image." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ForesToolboxRS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -190,15 +182,13 @@ sensors or from the same sensor have a co-registration.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ForesToolboxRS</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>raster</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: sp</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>factoextra</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: ggplot2</span></div><div class='output co'>#&gt; <span class='message'>Welcome! Related Books: `Practical Guide To Cluster Analysis in R` at https://goo.gl/13EFCZ</span></div><div class='input'><span class='no'>b1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/raster.html'>raster</a></span>(<span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>nrow</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>val</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>2e+15</span>, <span class='fl'>10000</span>))
-<span class='no'>b2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/raster.html'>raster</a></span>(<span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>nrow</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>val</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>2e+15</span>, <span class='fl'>10000</span>))
-<span class='co'># Radar images</span>
-<span class='no'>vv</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/raster.html'>raster</a></span>(<span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>nrow</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>val</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>2e+15</span>, <span class='fl'>10000</span>))
-<span class='co'># Stack</span>
-<span class='no'>img</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/stack.html'>stack</a></span>(<span class='no'>b1</span>,<span class='no'>b2</span>,<span class='no'>vv</span>)
-<span class='co'># Fusion</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>raster</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: sp</span></div><div class='input'><span class='no'>rasterio</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>nXOff</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>nYOff</span> <span class='kw'>=</span> <span class='fl'>50</span>)
+<span class='no'>img</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"simple_mosaic"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"ForesToolboxRS"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>read_stars</span>(<span class='kw'>RasterIO</span> <span class='kw'>=</span> <span class='no'>rasterio</span>)
+<span class='no'>img</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='smootH-ftb.html'>smootH</a></span>(<span class='no'>img</span>)
 <span class='no'>fusion</span> <span class='kw'>&lt;-</span> <span class='fu'>fusionRS</span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>img</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plotRGB.html'>plotRGB</a></span>(<span class='no'>fusion</span><span class='kw'>[[</span><span class='fl'>1</span>]], <span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='no'>F</span>, <span class='kw'>stretch</span><span class='kw'>=</span><span class='st'>"lin"</span>,<span class='kw'>main</span> <span class='kw'>=</span><span class='st'>"Fused images"</span>)</div><div class='img'><img src='fusionRS-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plotRGB.html'>plotRGB</a></span>(<span class='no'>fusion</span><span class='kw'>[[</span><span class='fl'>1</span>]], <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>stretch</span><span class='kw'>=</span><span class='st'>"lin"</span>,<span class='kw'>main</span> <span class='kw'>=</span><span class='st'>"Fused images"</span>)</div><div class='img'><img src='fusionRS-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
