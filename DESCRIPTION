@@ -1,12 +1,12 @@
 Package: ForesToolboxRS
 Type: Package
 Title: Remote Sensing Tools for Forest Monitoring
-Version: 0.0.4
+Version: 0.0.6
 Authors@R: 
     c(person(given = "Yonatan",
              family = "Tarazona Coronel",
              role = c("aut","cre"),
-             email = "ryali93@gmail.com",
+             email = "geoyons@gmail.com",
              comment = c(ORCID = "0000-0002-5208-1004")),
       person(given = "Cesar",
                    family = "Aybar",

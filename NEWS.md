@@ -1,3 +1,8 @@
+# ForesToolboxRS 0.0.6
+
+* **pvts.R** created by Tarazona added without any modification.
+* new examples created by Tarazona added.
+
 # ForesToolboxRS 0.0.4
 
 * **pvts.R** added.
