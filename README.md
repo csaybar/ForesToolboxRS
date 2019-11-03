@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-<img src="https://raw.githubusercontent.com/csaybar/ForesToolboxRS/master/man/figures/logo.png" align="right" width = 15%/>
-=======
 <img src="https://raw.githubusercontent.com/ytarazona/ForesToolboxRS/master/man/figures/logo.png" align="right" width = 15%/>
->>>>>>> dev
 
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/csaybar/forestoolboxrs?branch=dev&svg=true)](https://ci.appveyor.com/project/csaybar/forestoolboxrs)

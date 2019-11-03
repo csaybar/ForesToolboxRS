@@ -28,12 +28,9 @@ has an annual frequency of 1). See \link[stats]{ts} for more details.}
 
 \item{time}{If it is TRUE the plotting will be with time coordinates
 (only if the "tr" parameter is within the function).}
-<<<<<<< HEAD
-=======
 
 \item{vf}{If the monitoring is with Photosynthetic Vegetation series,
 then switch to TRUE.}
->>>>>>> dev
 }
 \description{
 Change detection using the PVts-\eqn{\beta} approach
@@ -63,20 +60,6 @@ vec <- c(0.86,0.93,0.97,0.91,0.95,0.96,0.91,0.88,0.92,0.89,0.90,0.89,0.91,0.92,0
          0.90,0.92,0.84,0.46,0.20,0.27,0.22,0.52,0.63,0.61,0.67,0.64,0.86) # photosynthetic vegetation
 # time series between 1990 and 2017
 # We will detect changes in 2008 (position 19)
-<<<<<<< HEAD
-vec <- c(0.86, 0.93, 0.97, 0.91, 0.95, 0.96,
-         0.91, 0.88, 0.92, 0.89, 0.90, 0.89,
-         0.91, 0.92, 0.89, 0.90, 0.92, 0.84,
-         0.46, 0.20, 0.27, 0.22, 0.52, 0.63,
-         0.61, 0.67, 0.64, 0.86)
-cd <- pvts(x = vec, start = 18, end = 19, threshold = 5)
-#Example 2.
-#Change monitoring period 2006-2016. Where 2000 is position 1 and
-#2004 is position 5
-imgs <- brick(system.file("evi/evi20002016.tif", package="ForesToolboxRS"))
-cd <- pvts(x=imgs, startm=1, endm=5, threshold=3) # EVI indices
-plot(cd)
-=======
 cd <- pvts(x=vec, startm=19, endm=19, threshold= 5)
 
 # Example 2.
@@ -95,5 +78,4 @@ Yonatan Tarazona
 This algorithm will allow to detect disturbances in the forests using
 all the available Landsat set. In fact, it can also be run with sensors
 such as MODIS.
->>>>>>> dev
 }

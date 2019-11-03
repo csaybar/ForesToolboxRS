@@ -31,14 +31,11 @@ sensors or from the same sensor have a co-registration.
 \examples{
 library(ForesToolboxRS)
 library(raster)
-library(factoextra)
-b1 <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
-b2 <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
-# Radar images
-vv <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
-# Stack
-img <- stack(b1,b2,vv)
-# Fusion
+rasterio = list(nXOff = 50, nYOff = 50)
+img <- system.file("simple_mosaic", package="ForesToolboxRS") \%>\%
+  list.files(full.names = TRUE) \%>\%
+  read_stars(RasterIO = rasterio)
+img <- smootH(img)
 fusion <- fusionRS(x=img)
-plotRGB(fusion[[1]], 1,2,3, axes=F, stretch="lin",main ="Fused images")
+plotRGB(fusion[[1]], axes=FALSE, stretch="lin",main ="Fused images")
 }

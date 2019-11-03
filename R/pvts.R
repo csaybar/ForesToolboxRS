@@ -1,4 +1,3 @@
-
 #' Change detection using the PVts-\eqn{\beta} approach
 #'
 #' @author Yonatan Tarazona
@@ -34,16 +33,9 @@
 #' has an annual frequency of 1). See \link[stats]{ts} for more details.
 #' @param time If it is TRUE the plotting will be with time coordinates
 #' (only if the "tr" parameter is within the function).
-<<<<<<< HEAD
-#' @importFrom stats sd time ts
-#' @importFrom graphics points abline polygon text grid legend plot
-#' @importFrom grDevices adjustcolor
-#' @importFrom raster values<-
-=======
 #' @param vf If the monitoring is with Photosynthetic Vegetation series,
 #' then switch to TRUE.
 #' @export
->>>>>>> dev
 #' @examples
 #' library(ForesToolboxRS)
 #' library(forecast)
@@ -54,22 +46,6 @@
 #'          0.90,0.92,0.84,0.46,0.20,0.27,0.22,0.52,0.63,0.61,0.67,0.64,0.86) # photosynthetic vegetation
 #' # time series between 1990 and 2017
 #' # We will detect changes in 2008 (position 19)
-<<<<<<< HEAD
-#' vec <- c(0.86, 0.93, 0.97, 0.91, 0.95, 0.96,
-#'          0.91, 0.88, 0.92, 0.89, 0.90, 0.89,
-#'          0.91, 0.92, 0.89, 0.90, 0.92, 0.84,
-#'          0.46, 0.20, 0.27, 0.22, 0.52, 0.63,
-#'          0.61, 0.67, 0.64, 0.86)
-#' cd <- pvts(x = vec, start = 18, end = 19, threshold = 5)
-#' #Example 2.
-#' #Change monitoring period 2006-2016. Where 2000 is position 1 and
-#' #2004 is position 5
-#' imgs <- brick(system.file("evi/evi20002016.tif", package="ForesToolboxRS"))
-#' cd <- pvts(x=imgs, startm=1, endm=5, threshold=3) # EVI indices
-#' plot(cd)
-#' @export
-pvts <- function(x, startm, endm, threshold = 5, img, tr, time = FALSE) {
-=======
 #' cd <- pvts(x=vec, startm=19, endm=19, threshold= 5)
 #'
 #' # Example 2.
@@ -83,7 +59,6 @@ pvts <- function(x, startm, endm, threshold = 5, img, tr, time = FALSE) {
 #'
 pvts<- function(x, startm, endm, threshold=5, img, tr, time=FALSE, vf=FALSE) {
 
->>>>>>> dev
   if (is(x, "vector")) {
     x[x==0 | x== -1] <- NA
     x[summary(x)[7] >= (length(x)-1)] <- 100
@@ -129,52 +104,6 @@ pvts<- function(x, startm, endm, threshold=5, img, tr, time=FALSE, vf=FALSE) {
       x[i,][summary(x[i,])[7] >= (dim(x)[2]-1)] <- 100
       x[i,] <- na.interp(x[i,])
     }
-<<<<<<< HEAD
-  } else if (is(x, "matrix")) {
-    #DONT WORK
-    breakR <- img
-    mean <- apply(x[, 1:startm], 1, mean)
-    std <- apply(x[, 1:startm], 1, sd)
-    cd <- ifelse(x[, endm] < (mean - threshold * std), 1, 0)
-    values(breakR) <- cd
-    breakR[img < 80 | img < 0.8] <- 0
-  } else if (is(x, "RasterStack") | is(x, "RasterBrick")) {
-    sd_na <- function(x) sd(x,na.rm=TRUE)
-    mean_na <- function(x) mean(x,na.rm=TRUE)
-
-    if (missing(img)) {
-      img <- x[[nlayers(x)]]
-      #img <- mean_na(x)
-    }
-
-    period_base <- x[[startm:endm]]
-    r_mean <- calc(period_base, mean_na)
-    r_std <- calc(period_base, sd_na)
-
-    cd <- img < (r_mean - threshold*r_std)
-
-    mask_value <- ((img > 80) | (img < 0.8))
-    breakR <- cd*!mask_value
-
-  } else {
-    stop(class(x), " class is not supported")
-  }
-  return(breakR)
-}
-
-#' plot pvts
-#' @noRd
-plot.pvts <- function(x, endm,tr,time,main,li) {
-  p <- endm
-  n <- length(x) / 2
-  m <- length(x) / 20
-  # Plot in time coordinates
-  if (time) {
-    x <- ts(x, start = c(tr[1]), end = c(tr[2]), frequency = tr[3])
-    p <- time(x)[endm]
-    n <- time(x)[length(x) / 2]
-    m <- time(x)[length(x) / 20]
-=======
 
     mean<-apply(x[,1:(startm-1)], 1, mean)
     std<-apply(x[,1:(startm-1)], 1, sd)
@@ -210,7 +139,6 @@ plot.pvts <- function(x, endm,tr,time,main,li) {
   } else {
 
     stop(class(x), ' class is not supported')
->>>>>>> dev
   }
 
   return(breakR)
