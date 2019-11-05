@@ -12,25 +12,8 @@ coverage](https://codecov.io/gh/csaybar/ForesToolboxRS/branch/master/graph/badge
 
 ## ForesToolboxRS
 
-The PVts-β approach is implemented in R with the ForesToolboxRS package.
-This algorithm will allow to detect disturbances in the forests using
-all the available Landsat set. In fact, it can also be run with sensors
-such as MODIS (Moderate Resolution Imaging Spectroradiometer). In
-essence, the PVts-β approach is an algorithm that does not model the
-seasonal component in time series, instead it only requires calculating
-the mean and standard deviation of the time series itself to detect
-disturbances. Therefore, the PVts-β approach is a method: i) simple and
-intelligent that does not model seasonality, ii) has only one
-calibration parameter and iii) can be easily implemented by any standard
-user.
-
-For any work you will submit, credits from this algorithm must be given
-to:
-
-[Tarazona, Y., Mantas, V.M., Pereira, A.J.S.C. (2018). Improving
-tropical deforestation detection through using photosynthetic vegetation
-time series – (PVts-β). Ecological Indicators, 94,
-367–379.](https://doi.org/10.1016/j.ecolind.2018.07.012)
+ForesToolboxRS es un paquete R que fue creado con la finalidad de proporcionar una serie de herramientas y algoritmos diversos para el procesamiento y análisis de la Teledetección para la Observaciones de la Tierra, especialmente para el monitoreo de la perturbación de bosques. Todos los algoritmos implementados están basados en publicaciones científicas del más alto nivel. El enfoque PVts-β, un método de detección no estacional, está implementado en este paquete y es capaz de leer datos matriciales y raster. ForesToolboxRs es una iniciativa cuyas funciones están inspirados por el trabajo de [Tarazona, Y., Mantas, V.M., Pereira, A.J.S.C. (2018). Improving
+tropical deforestation detection through using photosynthetic vegetation time series – (PVts-β). Ecological Indicators, 94, 367–379.](https://doi.org/10.1016/j.ecolind.2018.07.012)
 
 # Getting Started
 
