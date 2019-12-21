@@ -14,57 +14,73 @@
 #' @importFrom stats prcomp na.omit
 #' @importFrom raster getValues as.data.frame brick
 #' @importFrom factoextra get_pca_var
-#' @param x RasterStack, RasterBrick
+#' @param x Optical image. It could be RasterStack or RasterBrick
+#' @param y Radar image. It could be RasterStack or RasterBrick
 #' @param na If TRUE the NA values of the images will be omitted from the analysis.
 #' @examples
 #' library(ForesToolboxRS)
 #' library(raster)
-#' rasterio = list(nXOff = 50, nYOff = 50)
-#' img <- system.file("simple_mosaic", package="ForesToolboxRS") %>%
-#'   list.files(full.names = TRUE) %>%
-#'   read_stars(RasterIO = rasterio)
-#' img <- smootH(img)
-#' fusion <- fusionRS(x=img)
-#' plotRGB(fusion[[1]], axes=FALSE, stretch="lin",main ="Fused images")
+#' library(factoextra)
+#'
+#'# Optical images
+#'b1 <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
+#'b2 <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
+#'optical <- stack(b1,b2)
+#'# Radar images
+#'vv <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
+#'vh <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
+#'radar <- stack(vv,vh)
+#'# Fusion
+#'fusion <- fusionRS(x=optical, y=radar)
+#'plotRGB(fusion[[1]], 1,2,3, axes=F, stretch="lin",main ="Fused images")
+#'
 #' @export
-fusionRS <- function(x, na = TRUE) {
+fusionRS <- function(x, y, na = FALSE) {
+
   if (is(x,'stars')) {
     x <- brick(mapply(function(z) as(x[z],'Raster'),seq_len(length(x))))
   }
 
-  if (is(x, "RasterStack") | is(x, "RasterBrick")) {
-    df <- as.data.frame(x)
+  if (is(x, "RasterStack") | is(x, "RasterBrick") & is(y, "RasterStack") | is(y, "RasterBrick")) {
 
-    # Omit NA
-    if (na) {
-      df <- na.omit(df)
-    }
-
-    acp <- prcomp(df, center = TRUE, scale = TRUE) # standardized variables
-    var <- summary(acp)$importance[1, ]^2 # Variance
-    pov <- summary(acp)$importance[2, ] # Proportion of variance
-    varAcum <- summary(acp)$importance[3, ] # Cumulative variance
-    corr <- get_pca_var(acp)$cor # Correlation
-    contri <- get_pca_var(acp)$contrib # Contribution in %
-
-    for (i in 1:dim(df)[2]) {
-      colnames(corr)[i] <- paste("PC", i, sep = "")
-      rownames(corr)[i] <- paste("Band", i, sep = "")
-      colnames(contri)[i] <- paste("PC", i, sep = "")
-      rownames(contri)[i] <- paste("Band", i, sep = "")
-    }
-
-    # Storing in a raster the principal components
-    acpY <- x
-    vr <- getValues(acpY)
-    p <- which(!is.na(vr)) # Positions of NA
-
-    # We assign a raster format to each PC
-    for (k in 1:dim(df)[2]) {
-      acpY[[k]][p] <- acp$x[, k]
+    if (extent(x)==extent(y)){
+      img <- stack(x, y)
+    } else {
+      stop(" The extent of the images are different.")
     }
   } else {
-    stop(class(x), " class is not supported")
+    stop(c(class(x),class(y)), " This classes are not supported yet.")
+  }
+
+  df <- as.data.frame(img)
+
+  # Omit NA
+  if (na) {
+    df <- na.omit(df)
+  }
+
+  acp <- prcomp(df, center = TRUE, scale = TRUE) # standardized variables
+  var <- summary(acp)$importance[1, ]^2 # Variance
+  pov <- summary(acp)$importance[2, ] # Proportion of variance
+  varAcum <- summary(acp)$importance[3, ] # Cumulative variance
+  corr <- get_pca_var(acp)$cor # Correlation
+  contri <- get_pca_var(acp)$contrib # Contribution in %
+
+  for (i in 1:dim(df)[2]) {
+    colnames(corr)[i] <- paste("PC", i, sep = "")
+    rownames(corr)[i] <- paste("Band", i, sep = "")
+    colnames(contri)[i] <- paste("PC", i, sep = "")
+    rownames(contri)[i] <- paste("Band", i, sep = "")
+  }
+
+  # Storing in a raster the principal components
+  acpY <- img
+  vr <- getValues(acpY)
+  p <- which(!is.na(vr)) # Positions of NA
+
+  # We assign a raster format to each PC
+  for (k in 1:dim(df)[2]) {
+    acpY[[k]][p] <- acp$x[, k]
   }
 
   results <- list(FusionRS = acpY, var = var, pov = pov, varAcum = varAcum, corr = corr, contri = contri)

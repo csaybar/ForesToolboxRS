@@ -9,7 +9,7 @@
 #' @section References:
 #' Tarazona, Y., Mantas, V.M., Pereira, A.J.S.C. (2018). Improving tropical
 #' deforestation detection through using photosynthetic vegetation time
-#' series – (PVts-\eqn{\beta}). Ecological Indicators, 94, 367 379.
+#' series (PVts-\eqn{\beta}). Ecological Indicators, 94, 367 379.
 #' @section Note:
 #' In order to optimise the detections, it is advisable to make a smoothing
 #' through the \link[ForesToolboxRS]{smootH} function before detecting changes. The smoothing will

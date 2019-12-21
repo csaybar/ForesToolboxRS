@@ -11,7 +11,7 @@
 #'
 #' Tarazona, Y., Mantas, V.M., Pereira, A.J.S.C. (2018). Improving tropical
 #' deforestation detection through using photosynthetic vegetation time
-#' series – (PVts). Ecological Indicators, 94, 367 379.
+#' series (PVts). Ecological Indicators, 94, 367 379.
 #' @param x object of class numeric, matrix, RasterStack, RasterBrick or stars
 #' @param CLUSTER cluster to use for parallel apply; see \link[parallel]{makeCluster}
 #' @param interp Four interpolation methods are presented, "na.interp",

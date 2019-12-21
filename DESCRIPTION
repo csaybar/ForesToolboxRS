@@ -1,42 +1,27 @@
 Package: ForesToolboxRS
 Type: Package
 Title: Remote Sensing Tools for Forest Monitoring
-Version: 0.0.6
-Authors@R: 
-    c(person(given = "Yonatan",
-             family = "Tarazona Coronel",
-             role = c("aut","cre"),
-             email = "geoyons@gmail.com",
-             comment = c(ORCID = "0000-0002-5208-1004")),
-      person(given = "Cesar",
-                   family = "Aybar",
-                   role = c("ctb"),
-                   email = "csaybar@gmail.com",
-                   comment = c(ORCID = "0000-0003-2745-9535")))
+Version: 1.0.0
+Author: Yonatan Tarazona
+Maintainer: Yonatan Tarazona <geoyons@gmail.com>
 Description: Remote sensing tools for forest monitoring includes a series of 
     novel techniques to detect disturbances in the forest through optical images 
     and fusion of optical and microwave data. All tools are based on scientific 
     publications.
-License: MIT + file LICENSE
+License: MIT
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1.9000
+RoxygenNote: 6.1.1
 Depends:
     R (>= 3.3.0),
-    stars
 Imports:
     methods,
     forecast,
     parallel,
     raster,
+    rgdal,
     zoo,
     factoextra,
-    rgdal,
-    Rcpp,
-    magrittr
+    FactoMineR,
 Suggests: 
-    testthat,
     rmarkdown,
-    covr
-LinkingTo: 
-    Rcpp
