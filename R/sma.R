@@ -22,13 +22,15 @@
 #' @param endm Endmembers must be a matrix or data.frame and with more than one edmember.
 #' Rows represent the endmembers and columns represent the spectral bands.  The number
 #' of bands must be greater than the number of endmembers.
+#' @importFrom dplyr bind_cols
 #' @export
 #' @examples
+#' \dontrun{
 #' library(ForesToolboxRS)
 #' library(raster)
 #' library(dplyr)
 #'
-#'Load an example dataset
+#' #Load an example dataset
 #'data(fdata)
 #'
 #'#Endmembers
@@ -40,6 +42,7 @@
 #'
 #'#Unmix the image
 #'fractions <- sma(img_ndfi, endm)
+#'}
 sma <- function(img, endm){
 
   if (is(img, "RasterStack") | is(img, "RasterBrick")) {

@@ -27,6 +27,7 @@ Imports:
     methods,
     forecast,
     parallel,
+    dplyr,
     raster,
     rgdal,
     Rcpp,

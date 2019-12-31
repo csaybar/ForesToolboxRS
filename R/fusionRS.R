@@ -12,7 +12,7 @@
 #' Before executing the function, it is recommended that images coming from different
 #' sensors or from the same sensor have a co-registration.
 #' @importFrom stats prcomp na.omit
-#' @importFrom raster getValues as.data.frame brick
+#' @importFrom raster getValues as.data.frame brick extent plotRGB
 #' @importFrom factoextra get_pca_var
 #' @param x Optical image. It could be RasterStack or RasterBrick
 #' @param y Radar image. It could be RasterStack or RasterBrick
@@ -22,17 +22,17 @@
 #' library(raster)
 #' library(factoextra)
 #'
-#'# Optical images
-#'b1 <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
-#'b2 <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
-#'optical <- stack(b1,b2)
-#'# Radar images
-#'vv <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
-#'vh <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
-#'radar <- stack(vv,vh)
-#'# Fusion
-#'fusion <- fusionRS(x=optical, y=radar)
-#'plotRGB(fusion[[1]], 1,2,3, axes=F, stretch="lin",main ="Fused images")
+#' # Optical images
+#' b1 <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
+#' b2 <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
+#' optical <- stack(b1,b2)
+#' # Radar images
+#' vv <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
+#' vh <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
+#' radar <- stack(vv,vh)
+#' # Fusion
+#' fusion <- fusionRS(x=optical, y=radar)
+#' #plotRGB(fusion[[1]], 1,2,3, axes=F, stretch="lin",main ="Fused images")
 #'
 #' @export
 fusionRS <- function(x, y, na = FALSE) {

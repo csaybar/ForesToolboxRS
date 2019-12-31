@@ -39,7 +39,7 @@ Change detection using the PVts-\eqn{\beta} approach
 
 Tarazona, Y., Mantas, V.M., Pereira, A.J.S.C. (2018). Improving tropical
 deforestation detection through using photosynthetic vegetation time
-series – (PVts-\eqn{\beta}). Ecological Indicators, 94, 367 379.
+series (PVts-\eqn{\beta}). Ecological Indicators, 94, 367 379.
 }
 
 \section{Note}{

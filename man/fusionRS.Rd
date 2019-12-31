@@ -4,10 +4,12 @@
 \alias{fusionRS}
 \title{Fusion of images with different observation geometry.}
 \usage{
-fusionRS(x, na = TRUE)
+fusionRS(x, y, na = FALSE)
 }
 \arguments{
-\item{x}{RasterStack, RasterBrick}
+\item{x}{Optical image. It could be RasterStack or RasterBrick}
+
+\item{y}{Radar image. It could be RasterStack or RasterBrick}
 
 \item{na}{If TRUE the NA values of the images will be omitted from the analysis.}
 }
@@ -31,11 +33,18 @@ sensors or from the same sensor have a co-registration.
 \examples{
 library(ForesToolboxRS)
 library(raster)
-rasterio = list(nXOff = 50, nYOff = 50)
-img <- system.file("simple_mosaic", package="ForesToolboxRS") \%>\%
-  list.files(full.names = TRUE) \%>\%
-  read_stars(RasterIO = rasterio)
-img <- smootH(img)
-fusion <- fusionRS(x=img)
-plotRGB(fusion[[1]], axes=FALSE, stretch="lin",main ="Fused images")
+library(factoextra)
+
+# Optical images
+b1 <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
+b2 <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
+optical <- stack(b1,b2)
+# Radar images
+vv <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
+vh <- raster(ncol = 100, nrow=100, val = sample(1:2e+15, 10000))
+radar <- stack(vv,vh)
+# Fusion
+fusion <- fusionRS(x=optical, y=radar)
+#plotRGB(fusion[[1]], 1,2,3, axes=F, stretch="lin",main ="Fused images")
+
 }

@@ -19,23 +19,26 @@
 #' only for Lansat 8 OLI. The default is SR. In addition, for any processing level,
 #' the image values must be rescaled between
 #' 0 and 10000.
-#' @export
+#' @importFrom dplyr bind_cols
 #' @examples
+#' \dontrun{
 #' library(ForesToolboxRS)
 #' library(raster)
-#'#'Load an example dataset
-#'data(fdata)
+#' #'Load an example dataset
+#' data(fdata)
 #'
-#'#Endmembers
-#'gv<-c(119.0,  475.0,  169.0,  6250.0, 2399.0, 675.0)
-#'npv<-c(1514.0, 1597.0, 1421.0, 3053.0, 7707.0, 1975.0)
-#'soil<-c(1799.0, 2479.0, 3158.0, 5437.0, 7707.0, 6646.0)
-#'cloud<-c(4031.0, 8714.0, 7900.0, 8989.0, 7002.0, 6607.0)
-#'endm <- matrix(c(gv,npv,soil,cloud), 4, 6, byrow = TRUE, dimnames =
-#'list(c("gv", "npv","soil","cloud"), c("B1", "B2", "B3","B4","B5","B6")))
+#' #Endmembers
+#' gv<-c(119.0,  475.0,  169.0,  6250.0, 2399.0, 675.0)
+#' npv<-c(1514.0, 1597.0, 1421.0, 3053.0, 7707.0, 1975.0)
+#' soil<-c(1799.0, 2479.0, 3158.0, 5437.0, 7707.0, 6646.0)
+#' cloud<-c(4031.0, 8714.0, 7900.0, 8989.0, 7002.0, 6607.0)
+#' endm <- matrix(c(gv,npv,soil,cloud), 4, 6, byrow = TRUE, dimnames =
+#' list(c("gv", "npv","soil","cloud"), c("B1", "B2", "B3","B4","B5","B6")))
 #'
-#'#Unmix the image
-#'ndfi <- ndfiSMA(img_ndfi, procesLevel="SR")
+#' #Unmix the image
+#' ndfi <- ndfiSMA(img_ndfi, procesLevel="SR")
+#' }
+#' @export
 ndfiSMA <- function(img, procesLevel="SR"){
 
   if (is(img, "RasterStack") | is(img, "RasterBrick")) {
@@ -107,7 +110,7 @@ ndfiSMA <- function(img, procesLevel="SR"){
     # NDFI
     ndfi_index <- (gvs-npvSoil)/(gvs+npvSoil)*100 + 100
 
-  } else if (interp=="TOA") {
+  } else if (procesLevel =="TOA") {
     # Endmembers
     endm <- matrix(c(924.6,  933.1,  455.8,  6418.3, 2445.8, 701.6,
                      2319.6, 2055.1, 1707.8, 3221.3, 7753.8, 2001.6,

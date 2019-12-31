@@ -47,7 +47,7 @@ Remote Sensing,5(12), 6159-6179.
 
 Tarazona, Y., Mantas, V.M., Pereira, A.J.S.C. (2018). Improving tropical
 deforestation detection through using photosynthetic vegetation time
-series – (PVts). Ecological Indicators, 94, 367 379.
+series (PVts). Ecological Indicators, 94, 367 379.
 }
 
 \examples{
